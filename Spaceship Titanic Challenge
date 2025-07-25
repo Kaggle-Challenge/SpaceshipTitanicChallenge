@@ -75,5 +75,13 @@ X = train.drop(['PassengerId','Name','Cabin','Transported'], axis=1)
 y = train['Transported'].astype(int)
 X_test = test.drop(['PassengerId','Name','Cabin'], axis=1)
 
+# Enhanced EDA
+
+# Correlation matrix
+plt.figure(figsize=(12, 8))
+sns.heatmap(train[cols_num + ['TotalExpenses'] + ['Transported']].corr(), annot=True, cmap='coolwarm')
+plt.title("Correlation Matrix")
+plt.show()
+
 
 
