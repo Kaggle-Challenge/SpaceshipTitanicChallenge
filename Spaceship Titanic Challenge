@@ -1,0 +1,21 @@
+# Import necessary libaries
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import StratifiedKFold
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.metrics import accuracy_score
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
+
+import shap
+import warnings
+warnings.filterwarnings("ignore")
+
+# Load Data
+train = pd.read_csv('https://raw.githubusercontent.com/Revathi343664/SpaceshipTitanicChallenge/refs/heads/main/train.csv')
+test = pd.read_csv('https://raw.githubusercontent.com/Revathi343664/SpaceshipTitanicChallenge/refs/heads/main/test.csv')
+submission = pd.read_csv('https://raw.githubusercontent.com/Revathi343664/SpaceshipTitanicChallenge/refs/heads/main/sample_submission.csv')
+test_ids = test['PassengerId']
