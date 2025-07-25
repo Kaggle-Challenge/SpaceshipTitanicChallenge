@@ -46,3 +46,8 @@ for df in [train, test]:
         df[c].fillna(df[c].mode()[0], inplace=True)
     for c in cols_num:
         df[c].fillna(df[c].median(), inplace=True)
+
+# Cabin Feature Engineering
+for df in [train, test]:
+    df[['Deck','CabinNum','Side']] = df['Cabin'].str.split('/', expand=True)
+    df['CabinNum'] = pd.to_numeric(df['CabinNum'], errors='coerce')
