@@ -31,3 +31,18 @@ sns.countplot(x='VIP', data=train, ax=axes[1]).set(title='VIP Count')
 sns.countplot(x='CryoSleep', data=train, ax=axes[2]).set(title='CryoSleep Count')
 plt.tight_layout()
 plt.show()
+
+# Cabin Feature Engineering
+for df in [train, test]:
+    df[['Deck','CabinNum','Side']] = df['Cabin'].str.split('/', expand=True)
+    df['CabinNum'] = pd.to_numeric(df['CabinNum'], errors='coerce')
+
+# Missing Value Imputation
+cols_cat = ['HomePlanet','CryoSleep','Destination','VIP','Deck','Side']
+cols_num = ['Age','RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','CabinNum']
+
+for df in [train, test]:
+    for c in cols_cat:
+        df[c].fillna(df[c].mode()[0], inplace=True)
+    for c in cols_num:
+        df[c].fillna(df[c].median(), inplace=True)
