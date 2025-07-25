@@ -41,13 +41,34 @@ for df in [train, test]:
 cols_cat = ['HomePlanet','CryoSleep','Destination','VIP','Deck','Side']
 cols_num = ['Age','RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','CabinNum']
 
-# Feature Engineering
-for df in [train, test]:
-    df['TotalExpenses'] = df[['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']].sum(axis=1)
-
 for df in [train, test]:
     for c in cols_cat:
         df[c].fillna(df[c].mode()[0], inplace=True)
     for c in cols_num:
         df[c].fillna(df[c].median(), inplace=True)
+
+# Feature Engineering
+for df in [train, test]:
+    df['TotalExpenses'] = df[['RoomService','FoodCourt','ShoppingMall','Spa','VRDeck']].sum(axis=1)
+# Encoding + Scaling
+le = LabelEncoder()
+for c in cols_cat:
+    train[c] = le.fit_transform(train[c].astype(str))
+    test[c] = le.transform(test[c].astype(str))
+
+scaler = StandardScaler()
+train[cols_num + ['TotalExpenses']] = scaler.fit_transform(train[cols_num + ['TotalExpenses']])
+test[cols_num + ['TotalExpenses']] = scaler.transform(test[cols_num + ['TotalExpenses']])
+
+# Encoding + Scaling
+le = LabelEncoder()
+for c in cols_cat:
+    train[c] = le.fit_transform(train[c].astype(str))
+    test[c] = le.transform(test[c].astype(str))
+
+scaler = StandardScaler()
+train[cols_num + ['TotalExpenses']] = scaler.fit_transform(train[cols_num + ['TotalExpenses']])
+test[cols_num + ['TotalExpenses']] = scaler.transform(test[cols_num + ['TotalExpenses']])
+
+
 
