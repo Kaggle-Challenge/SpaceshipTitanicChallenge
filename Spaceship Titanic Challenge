@@ -23,3 +23,11 @@ test_ids = test['PassengerId']
 
 # Missing Values Overview
 print("Missing values in train:\n", train.isnull().sum())
+
+# Initial EDA
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+sns.histplot(train['Age'].dropna(), kde=True, ax=axes[0]).set(title='Age Distribution')
+sns.countplot(x='VIP', data=train, ax=axes[1]).set(title='VIP Count')
+sns.countplot(x='CryoSleep', data=train, ax=axes[2]).set(title='CryoSleep Count')
+plt.tight_layout()
+plt.show()
