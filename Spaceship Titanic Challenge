@@ -94,3 +94,17 @@ sns.scatterplot(x='Spa', y='VRDeck', hue='Transported', data=train)
 plt.title('Spa vs VRDeck')
 plt.show()
 
+# Pairplot
+sns.pairplot(train[['Age', 'RoomService', 'VRDeck', 'Spa', 'TotalExpenses', 'Transported']].dropna(), hue='Transported', diag_kind='kde')
+plt.suptitle("Pairplot of Key Features", y=1.02)
+plt.show()
+
+# Categorical comparisons
+for col in ['VIP', 'Destination', 'Deck']:
+    plt.figure(figsize=(6,4))
+    sns.countplot(x=col, hue='Transported', data=train)
+    plt.title(f'{col} vs Transported')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
