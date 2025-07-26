@@ -108,3 +108,5 @@ for col in ['VIP', 'Destination', 'Deck']:
     plt.tight_layout()
     plt.show()
 
+
+
