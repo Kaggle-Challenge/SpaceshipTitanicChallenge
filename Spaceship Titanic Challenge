@@ -83,5 +83,14 @@ sns.heatmap(train[cols_num + ['TotalExpenses'] + ['Transported']].corr(), annot=
 plt.title("Correlation Matrix")
 plt.show()
 
+# Scatter Plots
+plt.figure(figsize=(8,6))
+sns.scatterplot(x='Age', y='TotalExpenses', hue='Transported', data=train)
+plt.title('Age vs TotalExpenses')
+plt.show()
 
+plt.figure(figsize=(8,6))
+sns.scatterplot(x='Spa', y='VRDeck', hue='Transported', data=train)
+plt.title('Spa vs VRDeck')
+plt.show()
 
