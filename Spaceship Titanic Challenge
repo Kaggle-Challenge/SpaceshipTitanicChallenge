@@ -155,3 +155,13 @@ shap.summary_plot(shap_values, X)
 # For individual prediction explanation
 shap.plots.waterfall(shap_values[0])
 
+# Create Submission
+submission = pd.DataFrame({
+    "PassengerId": test_ids,
+    "Transported": test_preds.astype(bool)
+})
+submission.to_csv("submission_lgbm.csv", index=False)
+print("\n✅ Submission file saved as 'submission_lgbm.csv'")
+
+from google.colab import files
+files.download("submission_lgbm.csv")
