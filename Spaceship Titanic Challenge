@@ -108,60 +108,12 @@ for col in ['VIP', 'Destination', 'Deck']:
     plt.tight_layout()
     plt.show()
 
-# Model Training with Cross-validation
-models = {
-    'XGBoost': XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42),
-    'LightGBM': LGBMClassifier(random_state=42)
-}
-
-skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-model_scores = {}
-
-for name, model in models.items():
-    fold_accuracies = []
-    for train_idx, val_idx in skf.split(X, y):
-        X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
-        y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
-
-        model.fit(X_train, y_train)
-        preds = model.predict(X_val)
-        acc = accuracy_score(y_val, preds)
-        fold_accuracies.append(acc)
-
-    model_scores[name] = {
-        "Average Accuracy": np.mean(fold_accuracies),
-        "Fold Accuracies": fold_accuracies
-    }
-
-# Show accuracy results
-for model, scores in model_scores.items():
-    print(f"\nModel: {model}")
-    print("Fold Accuracies:", np.round(scores["Fold Accuracies"], 4))
-    print("Average Accuracy:", round(scores["Average Accuracy"], 4))
-
-# Train on Full Data
-final_model = LGBMClassifier(random_state=42)
-final_model.fit(X, y)
-test_preds = final_model.predict(X_test)
-
-# XAI with SHAP
-explainer = shap.Explainer(final_model, X)
-shap_values = explainer(X)
-
-print("\n🔍 SHAP Summary Plot (Top Feature Contributions)")
-shap.summary_plot(shap_values, X, plot_type='bar')
-shap.summary_plot(shap_values, X)
-
-# For individual prediction explanation
-shap.plots.waterfall(shap_values[0])
-
-# Create Submission
-submission = pd.DataFrame({
-    "PassengerId": test_ids,
-    "Transported": test_preds.astype(bool)
-})
-submission.to_csv("submission_lgbm.csv", index=False)
-print("\n✅ Submission file saved as 'submission_lgbm.csv'")
-
-from google.colab import files
-files.download("submission_lgbm.csv")
+# Let's decide how many components to keep. We can visualize explained variance.
+pca = PCA().fit(X)
+plt.figure(figsize=(10, 6))
+plt.plot(np.cumsum(pca.explained_variance_ratio_))
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Explained Variance')
+plt.title('PCA - Cumulative Explained Variance')
+plt.grid(True)
+plt.show()
