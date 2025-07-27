@@ -131,3 +131,36 @@ X_test_pca = pca_transformer.transform(X_test)
 
 print(f"\nOriginal number of features: {X.shape[1]}")
 print(f"Number of features after PCA: {X_pca.shape[1]}")
+
+# --- 10. Model Training with Hyperparameter Tuning and Cross-Validation ---
+
+# Creating StratifiedKFold for robust evaluation
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+
+# --- XGBoost Classifier ---
+print("\n--- Training XGBoost Classifier with Hyperparameter Tuning ---")
+
+# Define parameter grid for RandomizedSearchCV (more efficient than GridSearchCV for large spaces)
+# For a full GridSearchCV, define a smaller, more focused grid after initial exploration.
+xgb_param_grid = {
+    'n_estimators': [100, 200, 300, 400],
+    'learning_rate': [0.01, 0.05, 0.1, 0.2],
+    'max_depth': [3, 5, 7, 9],
+    'subsample': [0.7, 0.8, 0.9, 1.0],
+    'colsample_bytree': [0.7, 0.8, 0.9, 1.0],
+    'gamma': [0, 0.1, 0.2, 0.3],
+    'lambda': [0.1, 1, 5], # L2 regularization term
+    'alpha': [0, 0.1, 0.5] # L1 regularization term
+}
+
+# Use RandomizedSearchCV for faster initial exploration
+xgb_model = XGBClassifier(random_state=42, use_label_encoder=False, eval_metric='logloss')
+xgb_random_search = RandomizedSearchCV(xgb_model, xgb_param_grid, n_iter=50, cv=skf,
+                                       scoring='accuracy', n_jobs=-1, verbose=1, random_state=42)
+# Using original features for tuning initially. You can also tune on PCA features.
+xgb_random_search.fit(X, y)
+
+print(f"Best XGBoost parameters: {xgb_random_search.best_params_}")
+print(f"Best XGBoost cross-validation accuracy: {xgb_random_search.best_score_:.4f}")
+
+best_xgb_model = xgb_random_search.best_estimator_
