@@ -139,5 +139,19 @@ for model, scores in model_scores.items():
     print("Fold Accuracies:", np.round(scores["Fold Accuracies"], 4))
     print("Average Accuracy:", round(scores["Average Accuracy"], 4))
 
+# Train on Full Data
+final_model = LGBMClassifier(random_state=42)
+final_model.fit(X, y)
+test_preds = final_model.predict(X_test)
 
+# XAI with SHAP
+explainer = shap.Explainer(final_model, X)
+shap_values = explainer(X)
+
+print("\n🔍 SHAP Summary Plot (Top Feature Contributions)")
+shap.summary_plot(shap_values, X, plot_type='bar')
+shap.summary_plot(shap_values, X)
+
+# For individual prediction explanation
+shap.plots.waterfall(shap_values[0])
 
