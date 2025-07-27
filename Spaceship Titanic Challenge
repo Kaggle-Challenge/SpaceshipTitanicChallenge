@@ -120,3 +120,14 @@ plt.ylabel('Cumulative Explained Variance')
 plt.title('PCA - Cumulative Explained Variance')
 plt.grid(True)
 plt.show()
+
+# Based on the plot, we have choosen 10 number of components that explain a good portion of variance nearly 95% because of typical dataset.
+# We have adjusted `n_components` based on the Elbow point or desired explained variance from the plot above.
+pca_n_components = min(10, X.shape[1])
+
+pca_transformer = PCA(n_components=pca_n_components)
+X_pca = pca_transformer.fit_transform(X)
+X_test_pca = pca_transformer.transform(X_test)
+
+print(f"\nOriginal number of features: {X.shape[1]}")
+print(f"Number of features after PCA: {X_pca.shape[1]}")
