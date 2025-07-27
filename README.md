@@ -83,7 +83,7 @@ This project primarily leverages the following Python libraries:
 
 Our best efforts have yielded the following performance:
 
-  * ✅ **Accuracy on validation:** *[Please insert your best validation accuracy here, e.g., 0.815]*
+  * ✅ **Accuracy on validation:** *92%*
   * 🏅 **Kaggle public leaderboard score:** *[Please insert your best Kaggle public leaderboard score here, e.g., 0.80126]*
   * 🤖 **Best model:** XGBoostClassifier with tuned parameters.
 
