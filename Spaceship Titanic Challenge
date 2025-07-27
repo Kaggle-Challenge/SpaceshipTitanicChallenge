@@ -5,11 +5,14 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold, GridSearchCV, RandomizedSearchCV
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, ConfusionMatrixDisplay
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
+from sklearn.decomposition import PCA
+from sklearn.pipeline import Pipeline
+
 
 import shap
 import warnings
