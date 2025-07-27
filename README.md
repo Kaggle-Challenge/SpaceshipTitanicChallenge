@@ -20,9 +20,9 @@
 **3 ## 📁 Files Included**
 
 Here's what you'll find in this repo:
-spaceship-titanic/
-│
-├── notebooks/ <- EDA and model training in Google Colab
+spaceship-titanic//n
+│/n
+├── notebooks/ <- EDA and model training in Google Colab/n
 │ └── Spaceship_Titanic_EDA_and_Modeling.ipynb
 ├── src/ <- Optional Python scripts for reusable code
 │ ├── data_preprocessing.py
