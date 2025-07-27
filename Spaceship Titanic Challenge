@@ -133,4 +133,11 @@ for name, model in models.items():
         "Fold Accuracies": fold_accuracies
     }
 
+# Show accuracy results
+for model, scores in model_scores.items():
+    print(f"\nModel: {model}")
+    print("Fold Accuracies:", np.round(scores["Fold Accuracies"], 4))
+    print("Average Accuracy:", round(scores["Average Accuracy"], 4))
+
+
 
