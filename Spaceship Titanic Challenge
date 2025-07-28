@@ -256,3 +256,4 @@ print(f"Best XGBoost cross-validation accuracy: {xgb_random_search.best_score_:.
 print(f"Best LightGBM cross-validation accuracy: {lgbm_random_search.best_score_:.4f}")
 print(f"Best CatBoost cross-validation accuracy: {cat_search.best_score_:.4f}")
 print(f"Best Random Forest cross-validation accuracy: {rf_search.best_score_:.4f}")
+
