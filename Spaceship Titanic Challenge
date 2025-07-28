@@ -276,4 +276,28 @@ print(f"CatBoost Training Accuracy: {accuracy_score(y, y_pred_cat):.4f}")
 y_pred_rf = best_rf_model.predict(X)
 print(f"Random Forest Training Accuracy: {accuracy_score(y, y_pred_rf):.4f}")
 
+# Confusion Matrices and Classification Reports
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+import matplotlib.pyplot as plt
+
+models = {
+    "XGBoost": (y_pred_xgb, 'Blues'),
+    "LightGBM": (y_pred_lgbm, 'Greens'),
+    "CatBoost": (y_pred_cat, 'Reds'),
+    "Random Forest": (y_pred_rf, 'cividis')
+}
+
+for name, (y_pred, color) in models.items():
+    print(f"\n--- {name} Evaluation ---")
+
+    cm = confusion_matrix(y, y_pred)
+    print(f"\nConfusion Matrix ({name}):\n{cm}")
+
+    ConfusionMatrixDisplay(cm, display_labels=['Not Transported', 'Transported']).plot(cmap=plt.get_cmap(color))
+    plt.title(f"Confusion Matrix - {name}")
+    plt.show()
+
+    print(f"\nClassification Report ({name}):")
+    print(classification_report(y, y_pred, target_names=['Not Transported', 'Transported']))
+
 
