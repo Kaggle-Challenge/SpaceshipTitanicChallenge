@@ -93,8 +93,7 @@ To run this project:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/your-username/spaceship-titanic.git
-    cd spaceship-titanic
+    git clone [https://github.com/Kaggle-Challenge/SpaceshipTitanicChallenge.git]
     ```
 2.  **Install Dependencies:**
     It's recommended to create a virtual environment first.
