@@ -258,5 +258,22 @@ print(f"Best LightGBM cross-validation accuracy: {lgbm_random_search.best_score_
 print(f"Best CatBoost cross-validation accuracy: {cat_search.best_score_:.4f}")
 print(f"Best Random Forest cross-validation accuracy: {rf_search.best_score_:.4f}")
 
+# Model Evaluation
+
+# Evaluate the best XGBoost model
+y_pred_xgb = best_xgb_model.predict(X)
+print(f"\nXGBoost Training Accuracy: {accuracy_score(y, y_pred_xgb):.4f}")
+
+# Evaluate the best LightGBM model
+y_pred_lgbm = best_lgbm_model.predict(X)
+print(f"LightGBM Training Accuracy: {accuracy_score(y, y_pred_lgbm):.4f}")
+
+# Evaluate the best CatBoost model
+y_pred_cat = best_cat_model.predict(X)
+print(f"CatBoost Training Accuracy: {accuracy_score(y, y_pred_cat):.4f}")
+
+# Evaluate the best Random Forest model
+y_pred_rf = best_rf_model.predict(X)
+print(f"Random Forest Training Accuracy: {accuracy_score(y, y_pred_rf):.4f}")
 
 
