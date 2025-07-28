@@ -24,14 +24,13 @@ Here's the structure of this repository:
 
 ```
 spaceship-titanic/
-├── notebooks/                              # EDA and model training in Google Colab
+├── notebooks/                              #  Google Colab code
 │   └── Spaceship_Titanic_EDA_and_Modeling.ipynb
-├── src/                                    # Optional Python scripts for reusable code
-│   ├── data_preprocessing.py
-│   └── train_model.py
+├── Dataset                                  # CSV files required for training and testing the models
+│   ├── train.csv
+│   └── test.csv
 ├── submission/                             # CSV files ready for Kaggle submission
-│   └── submission.csv
-├── requirements.txt                        # All Python libraries you need
+│   └── submission.csv                   
 └── README.md
 ```
 
@@ -65,8 +64,8 @@ Here’s a quick rundown of what’s going on inside the notebook and associated
 ## ⚙️ Main Components: Deeper Dive
 
   * `notebooks/Spaceship_Titanic_EDA_and_Modeling.ipynb`: This Colab notebook is the heart of the project, containing the full workflow from data loading and EDA to feature engineering, model training, and prediction generation. It's designed for interactive exploration and development.
-  * `src/data_preprocessing.py`: Contains modular functions for data loading, cleaning, and feature engineering, promoting reusability and cleaner code.
-  * `src/train_model.py`: Houses functions for model instantiation, training, hyperparameter tuning, and evaluation, allowing for easy experimentation with different models.
+  * `train.csv`: Contains training data.
+  * `test.csv`: Contains testing data.
   * `submission/`: Stores the final `submission.csv` file, ready to be uploaded to the Kaggle competition.
   * `models/`: (Not explicitly listed in your `Files Included` but inferred from `Main Components`) This directory would typically store trained models (e.g., using `joblib` or `pickle`) for future use or deployment without retraining.
 
@@ -96,12 +95,7 @@ To run this project:
     git clone [https://github.com/Kaggle-Challenge/SpaceshipTitanicChallenge.git]
     ```
 2.  **Install Dependencies:**
-    It's recommended to create a virtual environment first.
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    pip install -r requirements.txt
-    ```
+    It's recommended to install the required packages and libraries.
 3.  **Download Data:**
     Obtain the `train.csv` and `test.csv` datasets directly from the [Spaceship Titanic Kaggle competition page](https://www.kaggle.com/competitions/spaceship-titanic/data) and place them in a `data/` directory within the `spaceship-titanic/` root. (You might need to create this directory).
 4.  **Run the Notebook:**
