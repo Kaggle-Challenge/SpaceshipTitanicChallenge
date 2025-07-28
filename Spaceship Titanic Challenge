@@ -207,3 +207,22 @@ cat_search.fit(X, y)
 print("Best CatBoost parameters:", cat_search.best_params_)
 print(f"Best CatBoost CV accuracy: {cat_search.best_score_:.4f}")
 best_cat_model = cat_search.best_estimator_
+
+# Random Forest Classifier
+print("\n--- Training Random Forest Classifier with Hyperparameter Tuning ---")
+rf_param_grid = {
+    'n_estimators': [100, 200, 300, 400],
+    'max_depth': [None, 5, 10, 15],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4],
+    'bootstrap': [True, False]
+}
+
+rf_model = RandomForestClassifier(random_state=42)
+rf_search = RandomizedSearchCV(rf_model, rf_param_grid, n_iter=30, cv=skf, scoring='accuracy', n_jobs=-1, verbose=1, random_state=42)
+rf_search.fit(X, y)
+
+print("Best Random Forest parameters:", rf_search.best_params_)
+print(f"Best Random Forest CV accuracy: {rf_search.best_score_:.4f}")
+best_rf_model = rf_search.best_estimator_
+
