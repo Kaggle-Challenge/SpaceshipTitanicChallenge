@@ -285,7 +285,24 @@ model_scores = {
 
 
 best_model_name = max(model_scores, key=model_scores.get)
-print(f"The best model is: {best_model_name} with a cross-validation accuracy of {model_scores[best_model_name]:.4f}")
+print(f"The best model is: {best_model_name} with a cross-validation accuracy of {model_scores[best_model_name]:.4f}")0
+
+# Feature Importance (SHAP values for interpretability)
+print("\n--- SHAP Feature Importance (for Best CatBoost Model) ---")
+# Using the best CatBoost model for SHAP explanation
+explainer = shap.TreeExplainer(best_cat_model)
+shap_values = explainer.shap_values(X)
+
+# Summary plot
+shap.summary_plot(shap_values, X, plot_type="bar", show=False)
+plt.title("SHAP Feature Importance (Mean Absolute SHAP Value)")
+plt.tight_layout()
+plt.show()
+
+shap.summary_plot(shap_values, X, show=False)
+plt.title("SHAP Summary Plot")
+plt.tight_layout()
+plt.show()
 
 
 
