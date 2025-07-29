@@ -322,6 +322,17 @@ submission_df.to_csv('submission.csv', index=False)
 print("\nSubmission file 'submission.csv' created successfully!")
 print(submission_df.head())
 
+# Code to download the created CSV file
+try:
+    from google.colab import files
+    files.download('submission.csv')
+    print("Your 'submission.csv' file should now be downloading.")
+except ImportError:
+    print("The 'google.colab.files' module is not available.")
+    print("This usually means you are not running in a Google Colab environment.")
+    print("If you are in a local Jupyter environment, 'submission.csv' is saved in your current directory.")
+    print("You can manually download it from your file explorer.")
+
 
 
 
