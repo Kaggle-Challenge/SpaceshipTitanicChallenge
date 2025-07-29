@@ -304,6 +304,24 @@ plt.title("SHAP Summary Plot")
 plt.tight_layout()
 plt.show()
 
+# Predictions for Kaggle Submission
+
+# CatBoost Model is used for the final submission, based on cross-validation accuracy and leaderboard score.
+# Here, we'll assume CatBoost was slightly better based on CV accuracy.
+final_model = best_cat_model
+
+predictions = final_model.predict(X_test)
+
+# Create submission file
+submission_df = pd.DataFrame({
+    'PassengerId': test['PassengerId'], # Use original test PassengerId
+    'Transported': predictions.astype(bool) # Convert to boolean as per Kaggle's requirement
+})
+
+submission_df.to_csv('submission.csv', index=False)
+print("\nSubmission file 'submission.csv' created successfully!")
+print(submission_df.head())
+
 
 
 
