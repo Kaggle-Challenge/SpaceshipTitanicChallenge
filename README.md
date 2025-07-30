@@ -47,7 +47,7 @@ Here’s a quick rundown of what’s going on inside the notebook and associated
 
   * **Cleaning:**
 
-      * Filled missing numerical values (e.g., 'Age', 'RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck') using appropriate imputation strategies (e.g., median, mean, or predictive models).
+      * Filled missing numerical values (e.g., 'Age', 'RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck') using appropriate imputation strategies (median).
       * Handled missing categorical values using mode imputation or by creating a "Missing" category.
 
   * **Feature Engineering:**
@@ -68,7 +68,6 @@ Here’s a quick rundown of what’s going on inside the notebook and associated
   * `train.csv`: Contains training data.
   * `test.csv`: Contains testing data.
   * `submission/`: Stores the final `submission.csv` file, ready to be uploaded to the Kaggle competition.
-  * `models/`: (Not explicitly listed in your `Files Included` but inferred from `Main Components`) This directory would typically store trained models (e.g., using `joblib` or `pickle`) for future use or deployment without retraining.
 
 ## 🛠️ Tools and Libraries
 
