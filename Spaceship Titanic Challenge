@@ -27,17 +27,49 @@ test = pd.read_csv('https://raw.githubusercontent.com/Revathi343664/SpaceshipTit
 submission = pd.read_csv('https://raw.githubusercontent.com/Revathi343664/SpaceshipTitanicChallenge/refs/heads/main/sample_submission.csv')
 test_ids = test['PassengerId']
 
+# Summary of DataFrame structure and data types
 train.info()
+
+# Preview the first 5 rows of the dataset
 train.head()
+
+# Prints the number of rows and columns in the DataFrame
+print(train.shape)
+
+# Descriptive stats for all columns (numeric and categorical)
 train.describe(include='all')
 
 # Missing Values Overview
 print("Missing values in train:\n", train.isnull().sum())
 
-# Cabin and Name Colums Imputation
+# Cabin and Name Colums Imputation 
 for df in [train, test]:
     df['Cabin'].fillna('Unknown/Unknown/0', inplace=True)
     df['Name'].fillna('Unknown', inplace=True)
+
+# Missing Values Overview
+print("Missing values in train:\n", train.isnull().sum())
+
+# Cabin Feature Engineering
+for df in [train, test]:
+    df[['Deck','CabinNum','Side']] = df['Cabin'].str.split('/', expand=True)
+    df['CabinNum'] = pd.to_numeric(df['CabinNum'], errors='coerce')
+
+# Preview the first 5 rows of the dataset
+train.head()
+
+# Missing Value Imputation
+cols_cat = ['HomePlanet','CryoSleep','Destination','VIP','Deck','Side', 'Name', 'Cabin']
+cols_num = ['Age','RoomService','FoodCourt','ShoppingMall','Spa','VRDeck','CabinNum']
+
+for df in [train, test]:
+    for c in cols_cat:
+        df[c].fillna(df[c].mode()[0], inplace=True)
+    for c in cols_num:
+        df[c].fillna(df[c].median(), inplace=True)
+
+# Preview the first 5 rows of the dataset
+train.head()
 
 # Missing Values Overview
 print("Missing values in train:\n", train.isnull().sum())
@@ -60,8 +92,6 @@ fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 sns.countplot(x='Deck', hue='Transported', data=train, ax=axes[0]).set_title('Transported by Deck')
 sns.countplot(x='Side', hue='Transported', data=train, ax=axes[1]).set_title('Transported by Side'); axes[1].set_xticklabels(['P (Port)', 'S (Starboard)'])
 sns.boxplot(x='Transported', y='CabinNum', data=train, ax=axes[2]).set_title('CabinNum vs Transported')
-
-
 
 plt.tight_layout()
 plt.show()
