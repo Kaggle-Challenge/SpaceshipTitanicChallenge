@@ -26,9 +26,11 @@ Here's the structure of this repository:
 spaceship-titanic/
 ├── notebooks/                              #  Google Colab code
 │   └── Spaceship_Titanic_EDA_and_Modeling.ipynb
-├── Dataset                                  # CSV files required for training and testing the models
+├── Dataset                                  # CSV files required
 │   ├── train.csv
 │   └── test.csv
+|   └── sample_submission.csv
+|
 ├── submission/                             # CSV files ready for Kaggle submission
 │   └── submission.csv                   
 └── README.md
