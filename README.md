@@ -8,14 +8,14 @@ The mission is to predict which passengers got mysteriously "transported" to ano
 
 ## 📊 What's This Project About?
 
-In this project, we delved deep into the dataset, performing thorough cleaning and transformation. We engineered insightful features to capture underlying patterns and built robust predictive models utilizing the powerful capabilities of **XGBoost** and **LightGBM**.
+In this project, we delved deep into the dataset, performing thorough cleaning and transformation. We engineered insightful features to capture underlying patterns and built robust predictive models utilizing the powerful capabilities of **XGBoost**, **LightGBM**, **Random Forest** and **CatBoost**.
 
 You'll find code for:
 
   * 📊 **Exploratory Data Analysis (EDA):** Visualizing distributions, correlations, and key relationships to understand the data.
   * 🧹 **Data Cleaning & Missing Value Handling:** Implementing smart heuristics and techniques to address incomplete data.
   * 🏗️ **Feature Engineering:** Creating new, informative features from existing ones (e.g., decoding cabin information, calculating total spending).
-  * 🤖 **Model Training & Evaluation:** Developing and fine-tuning predictive models, assessing their performance rigorously.
+  * 🤖 **Model Training & Evaluation:** Developing and fine-tuning predictive models, assessing their performance rigorously using SHAP and PCA.
   * 📁 **Generating a Kaggle Submission:** Preparing predictions in the required format for submission to the competition.
 
 ## 📁 Files Included
@@ -29,7 +29,6 @@ spaceship-titanic/
 ├── Dataset                                  # CSV files required
 │   ├── train.csv
 │   └── test.csv
-|   └── sample_submission.csv
 |
 ├── submission/                             # CSV files ready for Kaggle submission
 │   └── submission.csv                   
@@ -58,7 +57,7 @@ Here’s a quick rundown of what’s going on inside the notebook and associated
 
   * **Modeling:**
 
-      * **Model Selection:** Explored various classification algorithms, with a focus on **XGBoostClassifier** and **LightGBMClassifier**.
+      * **Model Selection:** Explored various classification algorithms, with a focus on **XGBoostClassifier**, **LightGBMClassifier**, **Randomforest Classifier** and **CatBoost Classifier**.
       * **Hyperparameter Tuning:** Systematically tuned hyperparameters for the selected models using techniques like GridSearchCV or RandomizedSearchCV to optimize performance.
       * **Cross-Validation:** Employed k-fold cross-validation to ensure robust model evaluation and prevent overfitting.
       * **Prediction & Submission:** Generated predictions on the test set and formatted them for Kaggle submission.
@@ -77,16 +76,16 @@ This project primarily leverages the following Python libraries:
 
   * **Data Manipulation:** `pandas`, `numpy`
   * **Data Visualization:** `matplotlib`, `seaborn`
-  * **Machine Learning:** `scikit-learn` (for preprocessing, model selection, evaluation metrics), `xgboost`, `lightgbm`
+  * **Machine Learning:** `scikit-learn` (for preprocessing, model selection, evaluation metrics), `xgboost`, `lightgbm`,`random Forest` and `CatBoost`.
   * **Notebook Environment:** `Google Colab`
 
 ## 📈 My Best Results (So Far):
 
 Our best efforts have yielded the following performance:
 
-  * ✅ **Accuracy on validation:** *92%*
-  * 🏅 **Kaggle public leaderboard score:** *[Please insert your best Kaggle public leaderboard score here, e.g., 0.80126]*
-  * 🤖 **Best model:** XGBoostClassifier with tuned parameters.
+  * ✅ **Accuracy on validation:** **81.56%**
+  * 🏅 **Kaggle public leaderboard score:** **0.80967**
+  * 🤖 **Best model:** CatBoostClassifier with tuned parameters.
 
 ## 🚀 How to Use
 
