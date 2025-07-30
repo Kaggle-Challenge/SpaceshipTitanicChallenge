@@ -1,4 +1,3 @@
-
 # Import necessary libaries
 !pip install shap
 !pip install catboost
@@ -103,12 +102,10 @@ for df in [train, test]:
 # Encoding + Scaling
 le = LabelEncoder()
 for c in cols_cat:
-    train[c] = le.fit_transform(train[c].astype(str))
+    # Fit on the combined unique values from train and test for all categorical columns to handle unseen labels
+    le.fit(pd.concat([train[c], test[c]], axis=0).astype(str).unique())
+    train[c] = le.transform(train[c].astype(str))
     test[c] = le.transform(test[c].astype(str))
-
-scaler = StandardScaler()
-train[cols_num + ['TotalExpenses']] = scaler.fit_transform(train[cols_num + ['TotalExpenses']])
-test[cols_num + ['TotalExpenses']] = scaler.transform(test[cols_num + ['TotalExpenses']])
 
 # Enhanced EDA
 
@@ -257,6 +254,7 @@ print("Best Random Forest parameters:", rf_search.best_params_)
 print(f"Best Random Forest CV accuracy: {rf_search.best_score_:.4f}")
 best_rf_model = rf_search.best_estimator_
 
+
 # Cross-validation accuracies
 print(f"Best XGBoost cross-validation accuracy: {xgb_random_search.best_score_:.4f}")
 print(f"Best LightGBM cross-validation accuracy: {lgbm_random_search.best_score_:.4f}")
@@ -315,7 +313,7 @@ model_scores = {
 
 
 best_model_name = max(model_scores, key=model_scores.get)
-print(f"The best model is: {best_model_name} with a cross-validation accuracy of {model_scores[best_model_name]:.4f}")0
+print(f"The best model is: {best_model_name} with a cross-validation accuracy of {model_scores[best_model_name]:.4f}")
 
 # Feature Importance (SHAP values for interpretability)
 print("\n--- SHAP Feature Importance (for Best CatBoost Model) ---")
@@ -351,6 +349,7 @@ submission_df = pd.DataFrame({
 submission_df.to_csv('submission.csv', index=False)
 print("\nSubmission file 'submission.csv' created successfully!")
 print(submission_df.head())
+
 
 # Code to download the created CSV file
 try:
